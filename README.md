@@ -8,7 +8,7 @@
 
 应用支持独立静态发布，访问网页无需 OpenAI 或 GitHub 账号。打开后选择或创建的是当前浏览器的本机档案。个人记录与内置虚构示例分别保存。
 
-**在线地址（GitHub Pages 部署成功后生效）：** [打开成长证据簿](https://wangfei-2019.github.io/growth-evidence-journal/)
+**在线地址：** [打开成长证据簿](https://wangfei-2019.github.io/growth-evidence-journal/)
 
 ![成长证据簿示例总览](docs/images/overview-demo.png)
 
@@ -102,6 +102,12 @@ AI 建议不是已经完成的成果。程序会检查结构、引用与日期�
 
 GitHub Pages 仅发布程序和公共资源，不会把使用者的浏览器档案自动上传到仓库。
 
+“数据与恢复”会检测浏览器是否支持文件夹授权。支持时可选择固定文件夹，网页打开期间保存记录会更新完整备份；不支持时显示“下载备份模式”，提供完整备份下载。文件夹选择、权限拒绝、取消和写入结果都显示在操作旁。下载文件的保存位置由浏览器管理。
+
+自动写入本机文件夹需要浏览器提供 File System Access API，建议使用桌面版 Chrome 或 Edge 的独立标签页。内置浏览器可能无法提供此授权，不能靠网页强制开启。关闭网页后自动备份暂停，文件夹被移动或授权失效时会提示重新选择或授权。可参阅 [Chrome 官方说明](https://developer.chrome.com/docs/capabilities/web-apis/file-system-access)。
+
+完整备份恢复不会因超过 50 MB 而被直接拒绝。带附件的大备份会提示读取进度，解析后继续校验数据和附件；加密备份仍需原口令。恢复前先预览，再选择合并或替换。
+
 ## 在本机运行
 
 建议使用 **Node.js 24**，最低要求为 Node.js 22.13，并安装 Git。
@@ -116,11 +122,14 @@ npm run dev
 构建静态发布文件：
 
 ```bash
+npm test
 npm run typecheck
 npm run build
 ```
 
 输出位于 `pages-dist/`。`npm run build:pages` 等效，也可使用 `npm run dev:pages` 启动开发预览。构建前会从依赖复制 PDF 和 OCR 引擎资源；`public/ocr/lang/` 中的中英文训练数据需保留。
+
+`npm test` 使用 Node.js 24 运行回归检查，覆盖文件夹权限与兼容分支、大附件备份恢复、加密备份、重复提醒、回收站、工作分组、模型配置和设置页渲染。测试使用虚构记录与内存数据，不访问个人档案或调用真实模型。详见[部署功能检查记录](docs/deployment-check.md)。
 
 ## 用本机 Git 上传整个项目
 
@@ -147,7 +156,7 @@ git push -u origin main
 3. 在 **Actions** 查看 **Publish growth journal** 工作流。首次未自动运行或此前因 Pages 未启用而失败时，可点击 **Run workflow** 或重试失败的运行。
 4. 部署成功后，在 **Settings → Pages → Visit site** 获取访问地址。
 
-[部署工作流](.github/workflows/pages.yml) 使用 Node.js 24，依次执行 `npm ci`、`npm run typecheck`、`npm run build:pages`，然后上传 `pages-dist/` 并部署。仓库子路径由 `configure-pages` 自动设置；页面使用 Hash 路由，刷新 `#/records` 等地址不依赖服务器路由。
+[部署工作流](.github/workflows/pages.yml) 使用 Node.js 24，依次执行 `npm ci`、`npm test`、`npm run typecheck`、`npm run build:pages`，然后上传 `pages-dist/` 并部署。仓库子路径由 `configure-pages` 自动设置；页面使用 Hash 路由，刷新 `#/records` 等地址不依赖服务器路由。
 
 源码版应选择 **GitHub Actions**。只有已经构建好的静态成品放在仓库根目录时，才使用“Deploy from a branch”；不要将两种方式混用。
 

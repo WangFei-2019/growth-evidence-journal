@@ -10,7 +10,8 @@
     "build": "node scripts/sync-document-assets.mjs && vite build --config vite.pages.config.ts",
     "build:pages": "node scripts/sync-document-assets.mjs && vite build --config vite.pages.config.ts",
     "dev:pages": "node scripts/sync-document-assets.mjs && vite --config vite.pages.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "docx": "^9.10.0",
