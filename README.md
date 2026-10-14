@@ -1,5 +1,7 @@
 # 成长证据簿
 
+[![Pages 部署状态](https://github.com/WangFei-2019/growth-evidence-journal/actions/workflows/pages.yml/badge.svg)](https://github.com/WangFei-2019/growth-evidence-journal/actions/workflows/pages.yml)
+
 **从工作碎片整理成长记录，让每一项贡献都有原文依据。**
 
 成长证据簿是一款在浏览器中使用的个人工作与成长档案工具。粘贴多天日志或导入已有文档，校对日期与内容，再通过 AI 或手动方式整理持续工作、个人行动和实际结果，形成可追溯的证据卡片、时间轴和阶段回顾。
