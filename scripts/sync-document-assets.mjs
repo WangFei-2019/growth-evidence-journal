@@ -1,0 +1,10 @@
+import { cp, mkdir, readdir } from 'node:fs/promises';
+await mkdir('public/pdf-standard-fonts',{recursive:true});
+await cp('node_modules/pdfjs-dist/build/pdf.worker.min.mjs','public/pdf.worker.min.mjs');
+await cp('node_modules/pdfjs-dist/standard_fonts','public/pdf-standard-fonts',{recursive:true});
+console.log('PDF assets synchronized.');
+await mkdir('public/ocr/core',{recursive:true});
+await cp('node_modules/tesseract.js/dist/worker.min.js','public/ocr/worker.min.js');
+await cp('node_modules/tesseract.js-core/LICENSE','public/ocr/core/LICENSE');
+for(const file of await readdir('node_modules/tesseract.js-core'))if(file.endsWith('.wasm.js')||file.endsWith('.wasm'))await cp(`node_modules/tesseract.js-core/${file}`,`public/ocr/core/${file}`);
+console.log('Local OCR engine synchronized.');

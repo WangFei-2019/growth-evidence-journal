@@ -1,0 +1,31 @@
+# Dependencies and generated builds
+/node_modules
+/pages-dist/
+/dist/
+/coverage/
+*.tsbuildinfo
+
+# Local environment and credentials
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# Local execution state and private working files
+/.openai/
+/.sites-runtime/
+/.wrangler/
+/.agents/
+/.codex/
+/outputs/
+/work/
+/.publish-check/
+*.local
+.DS_Store
+npm-debug.log*
+
+# Keep runtime settings and app backup files outside source control
+/config.local.json
+/growth-evidence-backup*.json
+/成长证据簿-*.json
