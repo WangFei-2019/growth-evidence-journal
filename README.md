@@ -116,6 +116,7 @@ npm run dev
 构建静态发布文件：
 
 ```bash
+npm run typecheck
 npm run build
 ```
 
@@ -146,7 +147,7 @@ git push -u origin main
 3. 在 **Actions** 查看 **Publish growth journal** 工作流。首次未自动运行或此前因 Pages 未启用而失败时，可点击 **Run workflow** 或重试失败的运行。
 4. 部署成功后，在 **Settings → Pages → Visit site** 获取访问地址。
 
-[部署工作流](.github/workflows/pages.yml) 使用 Node.js 24，依次执行 `npm ci`、`npm run build:pages`，然后上传 `pages-dist/` 并部署。仓库子路径由 `configure-pages` 自动设置；页面使用 Hash 路由，刷新 `#/records` 等地址不依赖服务器路由。
+[部署工作流](.github/workflows/pages.yml) 使用 Node.js 24，依次执行 `npm ci`、`npm run typecheck`、`npm run build:pages`，然后上传 `pages-dist/` 并部署。仓库子路径由 `configure-pages` 自动设置；页面使用 Hash 路由，刷新 `#/records` 等地址不依赖服务器路由。
 
 源码版应选择 **GitHub Actions**。只有已经构建好的静态成品放在仓库根目录时，才使用“Deploy from a branch”；不要将两种方式混用。
 

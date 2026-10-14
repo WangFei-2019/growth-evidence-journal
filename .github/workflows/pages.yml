@@ -20,6 +20,7 @@ jobs:
       - uses: actions/configure-pages@v5
         id: pages
       - run: npm ci
+      - run: npm run typecheck
       - run: npm run build:pages
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
